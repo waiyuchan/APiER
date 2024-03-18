@@ -1,0 +1,23 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# Output of the go build command
+/bin/
+/pkg/
+
+# Dependency directories (remove the comment below if you're using vendoring)
+# /vendor/
+
+# IDE files
+.idea/
+
+# macOS specific
+.DS_Store
+
+# Windows specific
+Thumbs.db
