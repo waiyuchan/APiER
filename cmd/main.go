@@ -7,12 +7,17 @@ import (
 )
 
 func main() {
-	db.Init() // 初始化数据库连接
+	// 初始化数据库连接
+	db.Init()
 
 	r := gin.Default()
-	// 设置路由...
 
+	// 路由注册
 	routes.RegisterRoutes(r)
 
-	r.Run() // 在localhost:8080上启动服务
+	// 启动服务
+	err := r.Run()
+	if err != nil {
+		return
+	}
 }
