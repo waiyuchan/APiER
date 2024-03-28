@@ -1,8 +1,8 @@
-package handlers
+package web
 
 import (
 	"apier/internal/db"
-	"apier/internal/models"
+	"apier/internal/model"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -45,7 +45,7 @@ func CreateAdmin(c *gin.Context) {
 	}
 
 	// 创建管理员记录
-	admin := models.Admin{Username: input.Username, Password: input.Password, Email: input.Email, Role: input.Role}
+	admin := model.Admin{Username: input.Username, Password: input.Password, Email: input.Email, Role: input.Role}
 	result := db.DB.Create(&admin) // `db` 是*gorm.DB类型的全局变量
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
@@ -56,7 +56,7 @@ func CreateAdmin(c *gin.Context) {
 }
 
 func ListAdmins(c *gin.Context) {
-	var admins []models.Admin
+	var admins []model.Admin
 	result := db.DB.Find(&admins) // `db` 是*gorm.DB类型的全局变量
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})

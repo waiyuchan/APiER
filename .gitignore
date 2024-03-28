@@ -8,7 +8,6 @@
 
 # Output of the go build command
 /bin/
-/pkg/
 
 # Dependency directories (remove the comment below if you're using vendoring)
 # /vendor/
