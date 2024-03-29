@@ -30,7 +30,7 @@ func SuperAdminLogin(c *gin.Context) {
 	// 假设超级管理员用户名和密码分别为admin和password（实际开发中需要更安全的验证机制）
 
 	if input.Username == "admin" && input.Password == "password" {
-		c.JSON(http.StatusOK, gin.H{"message": "Login successful"})
+		c.JSON(http.StatusOK, gin.H{"notification": "Login successful"})
 	} else {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Incorrect username or password"})
 	}

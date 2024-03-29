@@ -2,7 +2,7 @@ package main
 
 import (
 	"apier/internal/db"
-	"apier/internal/routes"
+	"apier/routes"
 	"github.com/gin-gonic/gin"
 )
 
