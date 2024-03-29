@@ -2,7 +2,6 @@ package main
 
 import (
 	"apier/internal/db"
-	"apier/routes"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,7 +12,6 @@ func main() {
 	r := gin.Default()
 
 	// 路由注册
-	routes.RegisterRoutes(r)
 
 	// 启动服务
 	err := r.Run()

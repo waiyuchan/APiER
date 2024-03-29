@@ -1,0 +1,91 @@
+AppDebug: true # 设置程序所处的模式，debug=true 调试模式，日志优先显示在控制台， debug=false 非调试模式，将写入日志文件
+
+HttpServer:
+  Api:
+    Port: ":20191" # 接口服务端口,注意前面有冒号
+  Web:
+    Port: ":20201" # 后端管理系统接口端口，注意前面有冒号
+  AllowCrossDomain: true # 是否允许跨域，默认`允许`
+  TrustProxies: # 设置服务可以信任的代理服务器 (例如 nginx 前置代理服务器)
+    IsOpen: 0 # 可选值（0 或者 1）,如果 go 服务是被 nginx 代理，建议该值设置为 1，将 nginx 代理及机器的ip添加到 ProxyServerList 列表
+    ProxyServerList:
+      - "192.168.10.1" # nginx 代理服务器ip地址
+      - "192.168.10.2"
+
+Token:
+  JwtTokenSignKey: "apier_server" # 设置token生成时加密的签名
+  JwtTokenOnlineUsers: 10 # 一个账号密码允许最大获取几个有效的token，当超过这个值，第一次获取的token的账号、密码就会失效
+  JwtTokenCreatedExpireAt: 28800 # 创建时token默认有效秒数（token生成时间加上该时间秒数，算做有效期）,3600*8=28800 等于8小时
+  JwtTokenRefreshAllowSec: 86400 # 对于过期的token，允许在多少小时之内刷新，超过此时间则不允许刷新换取新token，86400=3600*24，即token过期24小时之内允许换新token
+  JwtTokenRefreshExpireAt: 36000 # 对于过期的token，支持从相关接口刷新获取新的token，它有效期为10个小时，3600*10=36000 等于10小时
+  BindContextKeyName: "userToken" # 用户在 header 头部提交的token绑定到上下文时的键名，方便直接从上下文(gin.context)直接获取每个用户的id等信息
+  IsCacheToRedis: 0 # 用户token是否缓存到redis, 如果已经正确配置了redis,建议设置为1, 开启redis缓存token，（1=用户token缓存到redis; 0=token只存在于mysql）
+
+Redis:
+  Host: "127.0.0.1"
+  Port: 6379
+  Auth: ""
+  MaxIdle: 10
+  MaxActive: 1000
+  IdleTimeout: 60
+  IndexDb: 1 # 注意 redis 默认连接的是 1 号数据库，不是 0号数据库
+  ConnFailRetryTimes: 3 # 从连接池获取连接失败，最大重试次数
+  ReConnectInterval: 1 # 从连接池获取连接失败，每次重试之间间隔的秒数
+
+Logs:
+  GinLogName: "/logs/gin.log" # 设置 gin 框架的接口访问日志
+  ServerLogName: "/logs/apier.log" # 设置GoSkeleton项目骨架运行时日志文件名，注意该名称不要与上一条重复 ,避免和 gin 框架的日志掺杂一起，造成混乱。
+  TextFormat: "console" # 记录日志的格式，参数选项：console、json ， console 表示一般的文本格式
+  TimePrecision: "millisecond" # 记录日志时，相关的时间精度，该参数选项：`second`、`millisecond`，分别表示`秒`和`毫秒`,默认为`毫秒`级别
+  MaxSize: 10 # 每个日志的最大尺寸(以MB为单位）， 超过该值，系统将会自动进行切割
+  MaxBackups: 7 # 保留旧日志最大个数
+  MaxAge: 15 # 保留旧日志最大天数
+  Compress: false # 日志备份时，是否进行压缩
+
+SnowFlake:
+  SnowFlakeMachineId: 2 # 如果本项目同时部署在多台机器，并且需要同时使用该算法，请为每一台机器设置不同的ID，区间范围: [0,1023]
+
+RabbitMq:
+  HelloWorld:
+    # 消息服务器地址、账号、密码， / (斜杠)表示默认的虚拟主机，如果是开发者自己创建的，直接追加在 / (斜杠)后面即可，例如：amqp://账号:密码@ip地址:5672/ginskeleton
+    Addr: "amqp://账号:密码@ip地址:5672/"
+    QueueName: "helloword_queue"
+    Durable: false # 消息是否持久化
+    ConsumerChanNumber: 2 # 消费者通道数量（允许一个消费者使用几个连接通道消费、处理消息）
+    OffLineReconnectIntervalSec: 5 # 消费者掉线后,重连间隔的秒数
+    RetryCount: 5 # 消费者掉线后,尝试重连最大次数
+  WorkQueue:
+    Addr: "amqp://账号:密码@ip地址:5672/" # 参照前文地址说明
+    QueueName: "work_queue"
+    Durable: false # 消息是否持久化
+    ConsumerChanNumber: 2 # 消费者通道数量（允许一个消费者使用几个连接通道消费、处理消息）
+    OffLineReconnectIntervalSec: 5 # 消费者掉线后,重连间隔的秒数
+    RetryCount: 5 # 消费者掉线后,尝试重连最大次数
+  PublishSubscribe:
+    Addr: "amqp://账号:密码@ip地址:5672/" # 消息服务器地址、账号、密码
+    ExchangeType: "fanout"
+    ExchangeName: "fanout_exchange" # 即时消息队列名称，
+    DelayedExchangeName: "delayed_fanout_exchange" # 延迟消息队列名称，必须事先在rabbitmq 服务器管理端手动创建
+    Durable: false # 消息是否持久化，如果初始化的是延迟消息队列,那么该参数会被程序强制设置为 true
+    QueueName: "" # 队列名称，为空 表示所有订阅的消费者（consumer）都可以接受到同样的消息，如果设置名称，会导致只有最后一个启动的消费者能接受到消息。
+    ConsumerChanNumber: 1 # 消费者通道数量（发布、订阅模式消费者使用一个通道，避免多个通道重复收到数据）
+    OffLineReconnectIntervalSec: 10 # 消费者掉线后,重连间隔的秒数
+    RetryCount: 5 # 消费者掉线后,尝试重连最大次数
+  Routing:
+    Addr: "amqp://账号:密码@ip地址:5672/" # 参照前文地址说明
+    ExchangeType: "direct"
+    ExchangeName: "direct_exchange"
+    DelayedExchangeName: "delayed_direct_exchange" # 延迟消息队列名称，必须事先在rabbitmq 服务器管理端手动创建
+    Durable: false # 消息是否持久化，如果初始化的是延迟消息队列,那么该参数会被程序强制设置为 true
+    QueueName: ""
+    OffLineReconnectIntervalSec: 10 # 消费者掉线后,重连间隔的秒数
+    RetryCount: 5 # 消费者掉线后,尝试重连最大次数
+  Topics:
+    Addr: "amqp://账号:密码@ip地址:5672/" # 参照前文地址说明
+    ExchangeType: "topic"
+    ExchangeName: "topic_exchange"
+    DelayedExchangeName: "delayed_topic_exchange" # 延迟消息队列名称，必须事先在rabbitmq 服务器管理端手动创建
+    Durable: false # 消息是否持久化，如果初始化的是延迟消息队列,那么该参数会被程序强制设置为 true
+    QueueName: ""
+    OffLineReconnectIntervalSec: 10 # 消费者掉线后,重连间隔的秒数
+    RetryCount: 5 # 消费者掉线后,尝试重连最大次数
