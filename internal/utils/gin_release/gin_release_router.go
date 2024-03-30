@@ -24,7 +24,7 @@ func ReleaseRouter() *gin.Engine {
 func CustomRecovery() gin.HandlerFunc {
 	return gin.CustomRecoveryWithWriter(ioutil.Discard, func(c *gin.Context, recovered interface{}) {
 		if err, ok := recovered.(error); ok {
-			// Log the error using zap
+			// Log the error using logger
 			variable.ZapLog.Error("Panic recovered", zap.Error(err))
 			// Respond with a generic error message
 			response.ErrorSystem(c, "", "Internal server error")

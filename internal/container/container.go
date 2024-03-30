@@ -37,12 +37,12 @@ func (c *containers) Set(key string, value interface{}) (res bool) {
 	return
 }
 
-// Delete  2.删除
+// Delete  删除
 func (c *containers) Delete(key string) {
 	syncMap.Delete(key)
 }
 
-// Get 3.传递键，从容器获取值
+// Get 传递键，从容器获取值
 func (c *containers) Get(key string) interface{} {
 	if value, exists := c.KeyIsExists(key); exists {
 		return value
