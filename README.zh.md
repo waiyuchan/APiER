@@ -1,4 +1,4 @@
-# APiER: API 管理开放平台
+# APiER: API 开放管理平台
 
 **English Version**: [English](README.md)
 
