@@ -1,32 +1,34 @@
-# APiER: API 管理开放平台
+# APiER: API Open Management Platform
 
-## 项目介绍
+**English Version**: [English](README.md)
 
-Web API 统一管理开放平台——阿皮尔（APiER）平台
+## Project Introduction
 
-## 环境准备
+Web API unified management open platform - APiER platform
 
-如果发现Go get失败，可以考虑以下操作：
+## Environment preparation
 
-打开你的终端并执行
+If you find that Go get fails, you can consider the following actions:
+
+Open your terminal and execute
 
 ```shell
 go env -w GO111MODULE=on
 go env -w GOPROXY=https://goproxy.cn,direct
 ```
 
-完成。
+Finish.
 
-### macOS 或 Linux
+### macOS or Linux
 
-打开你的终端并执行
+Open your terminal and execute
 
 ```shell
 export GO111MODULE=on
 export GOPROXY=https://goproxy.cn
 ```
 
-或者
+or
 
 ```shell
 echo "export GO111MODULE=on" >> ~/.profile
@@ -34,32 +36,32 @@ echo "export GOPROXY=https://goproxy.cn" >> ~/.profile
 source ~/.profile
 ```
 
-完成。
+Finish.
 
 ### Windows
 
-打开你的 PowerShell 并执行
+Open your PowerShell and execute
 
 ```shell
 C:\> $env:GO111MODULE = "on"
 C:\> $env:GOPROXY = "https://goproxy.cn"
 ```
 
-或者
+or
 
 ```text
-1. 打开“开始”并搜索“env”
-2. 选择“编辑系统环境变量”
-3. 点击“环境变量…”按钮
-4. 在“<你的用户名> 的用户变量”章节下（上半部分）
-5. 点击“新建…”按钮
-6. 选择“变量名”输入框并输入“GO111MODULE”
-7. 选择“变量值”输入框并输入“on”
-8. 点击“确定”按钮
-9. 点击“新建…”按钮
-10. 选择“变量名”输入框并输入“GOPROXY”
-11. 选择“变量值”输入框并输入“https://goproxy.cn”
-12. 点击“确定”按钮
+1. Open Start and search for "env"
+2. Select "Edit System Environment Variables"
+3. Click the "Environment Variables..." button
+4. Under the "User Variables for <yourusername>" section (top half)
+5. Click the “New…” button
+6. Select the "Variable Name" input box and enter "GO111MODULE"
+7. Select the "Variable value" input box and enter "on"
+8. Click the "OK" button
+9. Click the “New…” button
+10. Select the "Variable Name" input box and enter "GOPROXY"
+11. Select the "Variable Value" input box and enter "https://goproxy.cn"
+12. Click the "OK" button
 ```
 
-完成。
+Finish.
