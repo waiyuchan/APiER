@@ -1,6 +1,6 @@
 # APiER: API 管理开放平台
 
-**Chinese Version**: [中文](README.zh.md)
+**English Version**: [English](README.md)
 
 ## 项目介绍
 

@@ -1,6 +1,6 @@
 # APiER: API Open Management Platform
 
-**English Version**: [English](README.md)
+**Chinese Version**: [中文](README.zh.md)
 
 ## Project Introduction
 
