@@ -2,7 +2,11 @@ package web
 
 import (
 	"apier/internal/db"
+	"apier/internal/global/consts"
 	"apier/internal/model"
+	"apier/internal/service/web/super_admin/admin"
+	"apier/internal/utils/response"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -19,21 +23,44 @@ type CreateAdminInput struct {
 	Role     string `json:"role"`
 }
 
-func SuperAdminLogin(c *gin.Context) {
-	var input LoginInput
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"errors": err.Error()})
-		return
-	}
+type SuperAdmin struct {
+}
 
-	// 这里添加登录逻辑，比如检查用户名和密码是否匹配
-	// 假设超级管理员用户名和密码分别为admin和password（实际开发中需要更安全的验证机制）
-
-	if input.Username == "admin" && input.Password == "password" {
-		c.JSON(http.StatusOK, gin.H{"notification": "Login successful"})
+func (sa *SuperAdmin) SuperAdminRegister(context *gin.Context) {
+	username := context.GetString(consts.ValidatorPrefix + "username")
+	password := context.GetString(consts.ValidatorPrefix + "password")
+	if admin.CreateSuperAdminFactory().Register(username, password) {
+		response.Success(context, consts.RequestStatusOkMsg, "")
 	} else {
-		c.JSON(http.StatusUnauthorized, gin.H{"errors": "Incorrect username or password"})
+		response.Fail(context, consts.RequestRegisterFailCode, consts.RequestRegisterFailMsg, "")
 	}
+
+}
+
+func (sa *SuperAdmin) SuperAdminLogin(context *gin.Context) {
+
+	userName := context.GetString(consts.ValidatorPrefix + "username")
+	password := context.GetString(consts.ValidatorPrefix + "password")
+
+	superAdminModelFact := model.CreateSuperAdminFactory()
+	superAdminModel := superAdminModelFact.SuperAdminLogin(userName, password)
+
+	fmt.Println(superAdminModel)
+
+	//var input LoginInput
+	//if err := c.ShouldBindJSON(&input); err != nil {
+	//	c.JSON(http.StatusBadRequest, gin.H{"errors": err.Error()})
+	//	return
+	//}
+	//
+	//// 这里添加登录逻辑，比如检查用户名和密码是否匹配
+	//// 假设超级管理员用户名和密码分别为admin和password（实际开发中需要更安全的验证机制）
+	//
+	//if input.Username == "admin" && input.Password == "password" {
+	//	c.JSON(http.StatusOK, gin.H{"notification": "Login successful"})
+	//} else {
+	//	c.JSON(http.StatusUnauthorized, gin.H{"errors": "Incorrect username or password"})
+	//}
 }
 
 func CreateAdmin(c *gin.Context) {
