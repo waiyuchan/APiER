@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "apier/bootstrap"
 	"apier/internal/global/variable"
 	"apier/routes"
 )

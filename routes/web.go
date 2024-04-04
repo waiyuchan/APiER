@@ -21,6 +21,7 @@ func InitWebRouter() *gin.Engine {
 		router = gin_release.ReleaseRouter()
 
 	} else {
+
 		// 调试模式，开启 pprof 包，便于开发阶段分析程序性能
 		router = gin.Default()
 		pprof.Register(router)

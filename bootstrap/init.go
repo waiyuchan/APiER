@@ -23,8 +23,9 @@ func init() {
 	// 4.启动针对配置文件(confgi.yml、gorm_v2.yml)变化的监听， 配置文件操作指针，初始化为全局变量
 	variable.ConfigYaml = yaml_config.CreateYamlFactory()
 	variable.ConfigYaml.ConfigFileChangeListen()
+
 	// config>gorm_v2.yml 启动文件变化监听事件
-	variable.ConfigGormYaml = variable.ConfigYaml.Clone("gorm_v2")
+	variable.ConfigGormYaml = variable.ConfigYaml.Clone("gorm")
 	variable.ConfigGormYaml.ConfigFileChangeListen()
 
 	// 5.初始化全局日志句柄，并载入日志钩子处理函数
