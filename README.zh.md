@@ -65,3 +65,35 @@ C:\> $env:GOPROXY = "https://goproxy.cn"
 ```
 
 完成。
+
+## 运行项目
+
+### 方式一：直接运行
+
+直接执行 `go build main.go`
+
+### 方式二：使用 `air` 运行（调试模式下推荐使用）
+
+- 步骤一：安装 `air`
+
+```shell
+go install github.com/cosmtrek/air@latest
+```
+
+- 步骤二：初始化 `.toml` 文件
+
+```shell
+air init
+```
+
+- 步骤三：选择要运行的 `.toml` 文件
+
+可以设置多个 `.toml` 文件，比如业务后台服务 [.air.api.toml](.air.api.toml)、 后台管理服务 [.air.web.toml](.air.web.toml)
+
+- 步骤四：启动项目
+
+以启动后台管理服务为例，后台管理服务的toml文件是 [.air.web.toml](.air.web.toml)，那么，运行指令在项目根目录运行：
+
+```shell
+air -c .air.web.toml
+```
