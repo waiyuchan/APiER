@@ -17,8 +17,6 @@ go env -w GO111MODULE=on
 go env -w GOPROXY=https://goproxy.cn,direct
 ```
 
-Finish.
-
 ### macOS or Linux
 
 Open your terminal and execute
@@ -35,8 +33,6 @@ echo "export GO111MODULE=on" >> ~/.profile
 echo "export GOPROXY=https://goproxy.cn" >> ~/.profile
 source ~/.profile
 ```
-
-Finish.
 
 ### Windows
 
@@ -63,8 +59,6 @@ or
 11. Select the "Variable Value" input box and enter "https://goproxy.cn"
 12. Click the "OK" button
 ```
-
-Finish.
 
 ## Run the project
 
