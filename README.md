@@ -74,24 +74,24 @@ Directly execute `go build main.go`
 
 ### Method 2: Use `air` to run (recommended in debug mode)
 
-- Step 1: Install `air`
+#### Step 1: Install `air`
 
 ```shell
 go install github.com/cosmtrek/air@latest
 ```
 
-- Step 2: Initialize the `.toml` file
+#### Step 2: Initialize the `.toml` file
 
 ```shell
 air init
 ```
 
-- Step 3: Select the `.toml` file to run
+#### Step 3: Select the `.toml` file to run
 
 Multiple `.toml` files can be set, such as business background service [.air.api.toml](.air.api.toml), background
 management service [.air.web.toml](.air.web.toml)
 
-- Step 4: Start the project
+#### Step 4: Start the project
 
 Take starting the background management service as an example. The toml file of the background management service
 is [.air.web.toml](.air.web.toml). Then, the running command is run in the project root directory:
