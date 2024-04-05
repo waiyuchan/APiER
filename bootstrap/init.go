@@ -3,6 +3,7 @@ package bootstrap
 import (
 	"apier/internal/global/errors"
 	"apier/internal/global/variable"
+	"apier/internal/http/validator/common/register_validator"
 	"apier/internal/utils/gorm_v2"
 	"apier/internal/utils/logger/sys_log_hook"
 	"apier/internal/utils/logger/zap_factory"
@@ -17,7 +18,7 @@ func init() {
 	//checkRequiredFolders()
 
 	//3.初始化表单参数验证器，注册在容器（Web、Api共用容器）
-	//register_validator.WebRegisterValidator()
+	register_validator.WebRegisterValidator()
 	//register_validator.ApiRegisterValidator()
 
 	// 4.启动针对配置文件(confgi.yml、gorm_v2.yml)变化的监听， 配置文件操作指针，初始化为全局变量

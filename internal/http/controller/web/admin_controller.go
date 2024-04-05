@@ -29,6 +29,7 @@ type SuperAdmin struct {
 func (sa *SuperAdmin) SuperAdminRegister(context *gin.Context) {
 	username := context.GetString(consts.ValidatorPrefix + "username")
 	password := context.GetString(consts.ValidatorPrefix + "password")
+
 	if admin.CreateSuperAdminFactory().Register(username, password) {
 		response.Success(context, consts.RequestStatusOkMsg, "")
 	} else {

@@ -38,6 +38,7 @@ tmp_dir = "tmp"
 [log]
   main_only = false
   time = false
+  output = "./logs/gin.log"
 
 [misc]
   clean_on_exit = false
