@@ -1,6 +1,6 @@
 <div align="center">
     <img src="resources/img/logo_with_name.png" height="100px"/>
-    <h2>APiER: API Open Management Platform</h2>
+    <h1>APiER: API Open Management Platform</h1>
 </div>
 
 <div align="center">
