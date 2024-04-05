@@ -1,10 +1,20 @@
-# APiER: API 开放管理平台
+<div align="center">
+    <img src="resources/img/logo_with_name.png" height="100px"/>
+    <h1>APiER: API 开放管理平台</h1>
+</div>
 
-**English Version**: [English](README.md)
+<div align="center">
+    <img src="https://img.shields.io/badge/language-Golang-blue.svg" />
+    <img src="https://img.shields.io/badge/backend_frame-Gin-6db33f.svg" />
+    <img src="https://img.shields.io/badge/ORM-Gorm-red.svg" />
+</div>
 
-## 项目介绍
+<h4 align="center">
+    中文 | <a href="README.md">English</a>
+</h4>
 
-Web API 统一管理开放平台——阿皮尔（APiER）平台
+
+阿皮尔接口开放管理平台（APiER API Open Management Platform）是一个先进的API管理与开放平台，旨在为企业和开发者提供一个高效、安全、易于使用的API集成、管理和共享环境。
 
 ## 环境准备
 

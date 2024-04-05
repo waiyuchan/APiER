@@ -10,15 +10,11 @@
 </div>
 
 <h4 align="center">
-    <a href="README.zh.md">中文</a> | <a href="README.md">English</a>
+    <a href="README.zh.md">中文</a> | English
 </h4>
 
-[//]: # (**Chinese Version**: [中文]&#40;README.zh.md&#41;)
 
-## Project Introduction
-
-Web API unified management open platform - APiER platform
-
+APiER API Open Management Platform is an advanced API management and open platform that aims to provide enterprises and developers with an efficient, secure and easy-to-use API integration, management and sharing environment.
 ## Environment preparation
 
 If you find that Go get fails, you can consider the following actions:
