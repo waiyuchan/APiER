@@ -1,4 +1,6 @@
-# APiER: API Open Management Platform
+<div align="center"><img src="resources/img/logo_with_name.png" height="100px"/></div>
+
+<h2 align="center> APiER: API Open Management Platform </h2>
 
 **Chinese Version**: [中文](README.zh.md)
 
