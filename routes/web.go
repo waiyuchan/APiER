@@ -27,6 +27,8 @@ func InitWebRouter() *gin.Engine {
 		pprof.Register(router)
 	}
 
+	variable.ZapLog.Info("基本的运行提示类信息")
+
 	admin := router.Group("/apier/api/admin/")
 	{
 

@@ -3,6 +3,7 @@ package web
 import (
 	"apier/internal/db"
 	"apier/internal/global/consts"
+	"apier/internal/global/variable"
 	"apier/internal/model"
 	"apier/internal/service/web/super_admin/admin"
 	"apier/internal/utils/response"
@@ -40,6 +41,8 @@ func (sa *SuperAdmin) SuperAdminRegister(context *gin.Context) {
 
 func (sa *SuperAdmin) SuperAdminLogin(context *gin.Context) {
 
+	variable.ZapLog.Info("基本的运行提示类信息")
+
 	userName := context.GetString(consts.ValidatorPrefix + "username")
 	password := context.GetString(consts.ValidatorPrefix + "password")
 
@@ -47,6 +50,7 @@ func (sa *SuperAdmin) SuperAdminLogin(context *gin.Context) {
 	superAdminModel := superAdminModelFact.SuperAdminLogin(userName, password)
 
 	fmt.Println(superAdminModel)
+	variable.ZapLog.Info("基本的运行提示类信息")
 
 	//var input LoginInput
 	//if err := c.ShouldBindJSON(&input); err != nil {

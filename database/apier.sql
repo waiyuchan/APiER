@@ -11,7 +11,7 @@
  Target Server Version : 80031 (8.0.31)
  File Encoding         : 65001
 
- Date: 19/03/2024 21:01:19
+ Date: 06/04/2024 00:14:18
 */
 
 SET NAMES utf8mb4;
@@ -102,7 +102,7 @@ CREATE TABLE `api_call_stats`  (
   PRIMARY KEY (`stat_id`) USING BTREE,
   INDEX `api_id`(`api_id` ASC) USING BTREE,
   CONSTRAINT `api_call_stats_ibfk_1` FOREIGN KEY (`api_id`) REFERENCES `api_info` (`api_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '接口调用统计表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '接口调用统计表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for api_info
@@ -121,7 +121,7 @@ CREATE TABLE `api_info`  (
   `created_at` datetime NOT NULL COMMENT '创建时间',
   `updated_at` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`api_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '接口信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '接口信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for api_permission
@@ -148,7 +148,7 @@ CREATE TABLE `api_quota`  (
   PRIMARY KEY (`quota_id`) USING BTREE,
   INDEX `api_quota_developer_fgk`(`developer_id` ASC) USING BTREE,
   CONSTRAINT `api_quota_developer_fgk` FOREIGN KEY (`developer_id`) REFERENCES `developer` (`developer_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '接口调用额度' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '接口调用额度' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for api_tag
@@ -257,7 +257,7 @@ CREATE TABLE `domain_prefix_mapping`  (
   `created_at` datetime NOT NULL COMMENT '创建时间',
   `updated_at` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`mapping_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '域名前缀映射' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '域名前缀映射' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for internal_message
@@ -288,14 +288,14 @@ CREATE TABLE `message_recipient`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消息接收' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for superadmin
+-- Table structure for super_admin
 -- ----------------------------
-DROP TABLE IF EXISTS `superadmin`;
-CREATE TABLE `superadmin`  (
-  `id` int NOT NULL,
+DROP TABLE IF EXISTS `super_admin`;
+CREATE TABLE `super_admin`  (
+  `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '超级管理员' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '超级管理员' ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
