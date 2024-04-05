@@ -1,6 +1,8 @@
 <div align="center"><img src="resources/img/logo_with_name.png" height="100px"/></div>
 
-<div align="center><h2> APiER: API Open Management Platform </h2></div>
+# APiER: API Open Management Platform
+
+=====
 
 ![](https://img.shields.io/badge/language-Golang-blue.svg)
 ![](https://img.shields.io/badge/backend_frame-Gin-6db33f.svg)
