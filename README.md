@@ -7,8 +7,6 @@
 ![](https://img.shields.io/badge/ORM-Gorm-red.svg)
 ![](https://img.shields.io/badge/deploy-Docker-blue.svg)
 
----
-
 <h4 align="center">
     <a href="README.zh.md">中文</a> | <a href="README.md">English</a>
 </h4>
