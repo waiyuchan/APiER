@@ -2,9 +2,16 @@
 
 <h2 align="center> APiER: API Open Management Platform </h2>
 
----
+![](https://img.shields.io/badge/language-Golang-blue.svg)
+![](https://img.shields.io/badge/backend_frame-Gin-6db33f.svg)
+![](https://img.shields.io/badge/ORM-Gorm-red.svg)
+![](https://img.shields.io/badge/deploy-Docker-blue.svg)
 
-**Chinese Version**: [中文](README.zh.md)
+<h4 align="center">
+    <a href="README.zh.md">中文</a> | <a href="README.md">English</a>
+</h4>
+
+[//]: # (**Chinese Version**: [中文]&#40;README.zh.md&#41;)
 
 ## Project Introduction
 
