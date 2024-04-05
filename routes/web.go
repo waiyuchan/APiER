@@ -27,7 +27,7 @@ func InitWebRouter() *gin.Engine {
 		pprof.Register(router)
 	}
 
-	variable.ZapLog.Info("基本的运行提示类信息")
+	variable.ZapLog.Info("后台管理服务路由注册中......")
 
 	admin := router.Group("/apier/api/admin/")
 	{
@@ -35,6 +35,8 @@ func InitWebRouter() *gin.Engine {
 		noAuthToSuperAdmin := admin.Group("super_admin/")
 		{
 			noAuthToSuperAdmin.GET("login")
+
+			// 一般不需要的时候要把超级管理员的注册入口关闭
 			noAuthToSuperAdmin.POST("register", validatorFactory.Create(consts.ValidatorPrefix+"SuperAdminRegister"))
 		}
 
@@ -46,7 +48,16 @@ func InitWebRouter() *gin.Engine {
 			authToSuperAdmin.PUT("/")
 		}
 
+		authToAdmin := admin.Group("")
+		{
+			authToAdmin.POST("/")
+		}
+
 	}
+
 	// 可以在这里继续添加其他的路由组和路由注册
+
+	variable.ZapLog.Info("后台管理服务路由注册完成")
+
 	return router
 }
