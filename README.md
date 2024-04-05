@@ -2,6 +2,8 @@
 
 <h2 align="center> APiER: API Open Management Platform </h2>
 
+---
+
 **Chinese Version**: [中文](README.zh.md)
 
 ## Project Introduction
