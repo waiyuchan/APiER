@@ -14,6 +14,7 @@ type SuperAdminRegister struct {
 }
 
 func (sa SuperAdminRegister) CheckParams(context *gin.Context) {
+
 	// 先按照验证器提供的基本语法，基本可以校验90%以上的不合格参数
 	if err := context.ShouldBind(&sa); err != nil {
 		response.ValidatorError(context, err)

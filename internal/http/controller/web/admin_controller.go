@@ -6,7 +6,6 @@ import (
 	"apier/internal/global/variable"
 	"apier/internal/model"
 	"apier/internal/service/web/super_admin/admin"
-	"apier/internal/utils/response"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -31,11 +30,16 @@ func (sa *SuperAdmin) SuperAdminRegister(context *gin.Context) {
 	username := context.GetString(consts.ValidatorPrefix + "username")
 	password := context.GetString(consts.ValidatorPrefix + "password")
 
-	if admin.CreateSuperAdminFactory().Register(username, password) {
-		response.Success(context, consts.RequestStatusOkMsg, "")
-	} else {
-		response.Fail(context, consts.RequestRegisterFailCode, consts.RequestRegisterFailMsg, "")
-	}
+	fmt.Println(username)
+	fmt.Println(password)
+
+	admin.CreateSuperAdminFactory().Register(username, password)
+
+	//if admin.CreateSuperAdminFactory().Register(username, password) {
+	//	response.Success(context, consts.RequestStatusOkMsg, "")
+	//} else {
+	//	response.Fail(context, consts.RequestRegisterFailCode, consts.RequestRegisterFailMsg, "")
+	//}
 
 }
 

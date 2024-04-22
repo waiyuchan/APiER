@@ -16,23 +16,30 @@ type BaseModel struct {
 }
 
 func UseDbConn(sqlType string) *gorm.DB {
+	fmt.Println("use database connection")
 	var db *gorm.DB
 	sqlType = strings.Trim(sqlType, " ")
 	if sqlType == "" {
-		sqlType = variable.ConfigGormYaml.GetString("Gormv2.UseDbType")
+		//sqlType = variable.ConfigGormYaml.GetString("Gorm.UseDbType")
+		sqlType = "mysql"
 	}
-	switch strings.ToLower(sqlType) {
-	case "mysql":
-		if variable.GormDbMysql == nil {
-			variable.ZapLog.Fatal(fmt.Sprintf(errors.ErrorsGormNotInitGlobalPointer, sqlType, sqlType))
-		}
-		db = variable.GormDbMysql
-	case "sqlserver":
-
-	case "postgres", "postgre", "postgresql":
-
-	default:
-		variable.ZapLog.Error(errors.ErrorsDbDriverNotExists + sqlType)
+	if variable.GormDbMysql == nil {
+		variable.ZapLog.Fatal(fmt.Sprintf(errors.ErrorsGormNotInitGlobalPointer, sqlType, sqlType))
 	}
+	db = variable.GormDbMysql
+
+	//switch strings.ToLower(sqlType) {
+	//case "mysql":
+	//	if variable.GormDbMysql == nil {
+	//		variable.ZapLog.Fatal(fmt.Sprintf(errors.ErrorsGormNotInitGlobalPointer, sqlType, sqlType))
+	//	}
+	//	db = variable.GormDbMysql
+	//case "sqlserver":
+	//
+	//case "postgres", "postgre", "postgresql":
+	//
+	//default:
+	//	variable.ZapLog.Error(errors.ErrorsDbDriverNotExists + sqlType)
+	//}
 	return db
 }
