@@ -81,6 +81,7 @@ func CreateAdmin(c *gin.Context) {
 	}
 
 	fmt.Println(input.Username)
+	fmt.Println(input.Password)
 	// 创建管理员记录
 	admin := model.Admin{Username: input.Username, Password: input.Password, Email: input.Email, Role: input.Role}
 	result := db.DB.Create(&admin) // `db` 是*gorm.DB类型的全局变量
