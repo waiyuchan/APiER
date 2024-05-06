@@ -53,11 +53,12 @@ func (l logOutPut) Printf(strFormat string, args ...interface{}) {
 	if strings.HasPrefix(strFormat, "[info]") || strings.HasPrefix(strFormat, "[traceStr]") {
 		variable.ZapLog.Info(logFlag, zap.String(detailFlag, logRes))
 	} else if strings.HasPrefix(strFormat, "[error]") || strings.HasPrefix(strFormat, "[traceErr]") {
-		variable.ZapLog.Error(logFlag, zap.String(detailFlag, logRes))
+		if !strings.Contains(logRes, "record not found") {
+			variable.ZapLog.Error(logFlag, zap.String(detailFlag, logRes))
+		}
 	} else if strings.HasPrefix(strFormat, "[warn]") || strings.HasPrefix(strFormat, "[traceWarn]") {
 		variable.ZapLog.Warn(logFlag, zap.String(detailFlag, logRes))
 	}
-
 }
 
 // 尝试从外部重写内部相关的格式化变量
