@@ -11,8 +11,8 @@ import (
 type BaseModel struct {
 	*gorm.DB  `gorm:"-" json:"-"`
 	Id        int64  `gorm:"primaryKey" json:"id"`
-	CreatedAt string `json:"created_at"` //日期时间字段统一设置为字符串即可
-	UpdatedAt string `json:"updated_at"`
+	CreatedAt string `gorm:"-" json:"created_at,omitempty"` //日期时间字段统一设置为字符串即可
+	UpdatedAt string `gorm:"-" json:"updated_at,omitempty"`
 }
 
 func UseDbConn(sqlType string) *gorm.DB {

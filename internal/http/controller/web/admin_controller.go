@@ -6,6 +6,7 @@ import (
 	"apier/internal/global/variable"
 	"apier/internal/model"
 	"apier/internal/service/web/super_admin/admin"
+	"apier/internal/utils/response"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -30,16 +31,16 @@ func (sa *SuperAdmin) SuperAdminRegister(context *gin.Context) {
 	username := context.GetString(consts.ValidatorPrefix + "username")
 	password := context.GetString(consts.ValidatorPrefix + "password")
 
-	fmt.Println(username)
-	fmt.Println(password)
+	variable.ZapLog.Info("用户账号：" + username)
+	variable.ZapLog.Info("用户密码：" + password)
 
 	admin.CreateSuperAdminFactory().Register(username, password)
 
-	//if admin.CreateSuperAdminFactory().Register(username, password) {
-	//	response.Success(context, consts.RequestStatusOkMsg, "")
-	//} else {
-	//	response.Fail(context, consts.RequestRegisterFailCode, consts.RequestRegisterFailMsg, "")
-	//}
+	if admin.CreateSuperAdminFactory().Register(username, password) {
+		response.Success(context, consts.RequestStatusOkMsg, "")
+	} else {
+		response.Fail(context, consts.RequestRegisterFailCode, consts.RequestRegisterFailMsg, "")
+	}
 
 }
 
@@ -56,11 +57,11 @@ func (sa *SuperAdmin) SuperAdminLogin(context *gin.Context) {
 	fmt.Println(superAdminModel)
 	variable.ZapLog.Info("基本的运行提示类信息")
 
-	//var input LoginInput
-	//if err := c.ShouldBindJSON(&input); err != nil {
-	//	c.JSON(http.StatusBadRequest, gin.H{"errors": err.Error()})
-	//	return
-	//}
+	var input LoginInput
+	if err := context.ShouldBindJSON(&input); err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"errors": err.Error()})
+		return
+	}
 	//
 	//// 这里添加登录逻辑，比如检查用户名和密码是否匹配
 	//// 假设超级管理员用户名和密码分别为admin和password（实际开发中需要更安全的验证机制）

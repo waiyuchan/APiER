@@ -57,7 +57,7 @@ func init() {
 	// ================================================================================
 
 	// 6.根据配置初始化 gorm mysql 全局 *gorm.Db
-	if variable.ConfigGormYaml.GetInt("Gormv2.Mysql.IsInitGlobalGormMysql") == 1 {
+	if variable.ConfigGormYaml.GetInt("Gorm.Mysql.IsInitGlobalGormMysql") == 1 {
 		if dbMysql, err := gorm_v2.GetMysqlClient(); err != nil {
 			log.Fatal(errors.ErrorsGormInitFail + err.Error())
 		} else {

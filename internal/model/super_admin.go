@@ -3,8 +3,10 @@ package model
 import (
 	"apier/internal/global/variable"
 	"apier/internal/utils/encryption"
+	"errors"
 	"fmt"
 	"go.uber.org/zap"
+	"gorm.io/gorm"
 )
 
 func CreateSuperAdminFactory() *SuperAdminModel {
@@ -24,17 +26,35 @@ func (sam *SuperAdminModel) TableName() string {
 }
 
 // SuperAdminRegister 超级管理员注册
-func (sam *SuperAdminModel) SuperAdminRegister(userName string, password string) bool {
-	sql := "INSERT INTO `super_admin` (`username`, `password`) " +
-		"SELECT ? AS `username`, ? AS `password` FROM DUAL WHERE NOT EXISTS (" +
-		"SELECT 1 FROM `super_admin` WHERE `username` = ?" +
-		");"
-	result := sam.Exec(sql, userName, password, userName)
-	if result.RowsAffected > 0 {
-		return true
+func (sam *SuperAdminModel) SuperAdminRegister(userName string, encryptedPassword string) bool {
+	variable.ZapLog.Info("准备写入数据库...")
+
+	// 检查用户名是否已经存在
+	var existingUser SuperAdminModel
+	if result := sam.DB.Where("username = ?", userName).First(&existingUser); errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		// 如果用户不存在，则继续创建新用户
+	} else if result.Error != nil {
+		// 如果发生了其他错误，记录错误并返回
+		variable.ZapLog.Error("查询用户失败", zap.Error(result.Error))
+		return false
 	} else {
+		// 如果用户已经存在，则返回false表示注册失败
+		variable.ZapLog.Info("用户名已经存在")
 		return false
 	}
+
+	// 创建新用户
+	newUser := SuperAdminModel{
+		Username: userName,
+		Password: encryptedPassword,
+	}
+	if err := sam.DB.Create(&newUser).Error; err != nil {
+		variable.ZapLog.Error("插入数据失败", zap.Error(err))
+		return false
+	}
+
+	// 返回true表示注册成功
+	return true
 }
 
 // SuperAdminLogin 超级管理员登录

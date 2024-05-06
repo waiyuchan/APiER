@@ -5,7 +5,7 @@ const (
 	ErrorsContainerKeyAlreadyExists string = "该键已经注册在容器中了"
 	ErrorsPublicNotExists           string = "public 目录不存在"
 	ErrorsConfigYamlNotExists       string = "config.yml 配置文件不存在"
-	ErrorsConfigGormNotExists       string = "gorm_v2.yml 配置文件不存在"
+	ErrorsConfigGormNotExists       string = "gorm.yml 配置文件不存在"
 	ErrorsStorageLogsNotExists      string = "storage/logs 目录不存在"
 	ErrorsConfigInitFail            string = "初始化配置文件发生错误"
 	ErrorsSoftLinkCreateFail        string = "自动创建软连接失败,请以管理员身份运行客户端(开发环境为goland等，生产环境检查命令执行者权限), 最后一个可能：如果您是360用户，请退出360相关软件，才能保证go语言创建软连接函数： os.Symlink() 正常运行"
@@ -20,7 +20,7 @@ const (
 	ErrorsParseTokenFail            string = "解析token失败"
 	ErrorsGormInitFail              string = "Gorm 数据库驱动、连接初始化失败"
 	ErrorsCasbinNoAuthorization     string = "Casbin 鉴权未通过，请在后台检查 casbin 设置参数"
-	ErrorsGormNotInitGlobalPointer  string = "%s 数据库全局变量指针没有初始化，请在配置文件 config/gorm_v2.yml 设置 Gormv2.%s.IsInitGlobalGormMysql = 1, 并且保证数据库配置正确 \n"
+	ErrorsGormNotInitGlobalPointer  string = "%s 数据库全局变量指针没有初始化，请在配置文件 config/gorm.yml 设置 Gormv2.%s.IsInitGlobalGormMysql = 1, 并且保证数据库配置正确 \n"
 
 	// 数据库部分
 	ErrorsDbDriverNotExists        string = "数据库驱动类型不存在,目前支持的数据库类型：mysql、sqlserver、postgresql，您提交数据库类型："
