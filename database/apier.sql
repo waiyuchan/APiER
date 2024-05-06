@@ -11,7 +11,7 @@
  Target Server Version : 80031 (8.0.31)
  File Encoding         : 65001
 
- Date: 23/04/2024 01:09:06
+ Date: 07/05/2024 02:17:37
 */
 
 SET NAMES utf8mb4;
@@ -33,6 +33,10 @@ CREATE TABLE `admin`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '管理员' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of admin
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for admin_action
 -- ----------------------------
 DROP TABLE IF EXISTS `admin_action`;
@@ -48,6 +52,10 @@ CREATE TABLE `admin_action`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '管理员操作记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of admin_action
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for admin_permission
 -- ----------------------------
 DROP TABLE IF EXISTS `admin_permission`;
@@ -57,6 +65,10 @@ CREATE TABLE `admin_permission`  (
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '权限描述',
   PRIMARY KEY (`permission_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '管理员权限' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of admin_permission
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for admin_role_permission
@@ -72,6 +84,10 @@ CREATE TABLE `admin_role_permission`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '管理员角色权限关联关系' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of admin_role_permission
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for api_approval
 -- ----------------------------
 DROP TABLE IF EXISTS `api_approval`;
@@ -85,6 +101,10 @@ CREATE TABLE `api_approval`  (
   `updated_at` datetime NULL DEFAULT NULL COMMENT '审批更新时间',
   PRIMARY KEY (`approval_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '接口审批' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of api_approval
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for api_call_stats
@@ -103,6 +123,10 @@ CREATE TABLE `api_call_stats`  (
   INDEX `api_id`(`api_id` ASC) USING BTREE,
   CONSTRAINT `api_call_stats_ibfk_1` FOREIGN KEY (`api_id`) REFERENCES `api_info` (`api_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '接口调用统计表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of api_call_stats
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for api_info
@@ -124,6 +148,10 @@ CREATE TABLE `api_info`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '接口信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of api_info
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for api_permission
 -- ----------------------------
 DROP TABLE IF EXISTS `api_permission`;
@@ -136,6 +164,10 @@ CREATE TABLE `api_permission`  (
   `updated_at` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`permission_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '接口权限' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of api_permission
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for api_quota
@@ -151,6 +183,10 @@ CREATE TABLE `api_quota`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '接口调用额度' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of api_quota
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for api_tag
 -- ----------------------------
 DROP TABLE IF EXISTS `api_tag`;
@@ -159,6 +195,10 @@ CREATE TABLE `api_tag`  (
   `tag_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '标签名称',
   PRIMARY KEY (`tag_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '接口标签' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of api_tag
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for api_tag_relation
@@ -172,6 +212,10 @@ CREATE TABLE `api_tag_relation`  (
   CONSTRAINT `api_tag_relation_ibfk_1` FOREIGN KEY (`api_id`) REFERENCES `api_info` (`api_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `api_tag_relation_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `api_tag` (`tag_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '接口与标签关联关系' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of api_tag_relation
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for api_test_record
@@ -196,6 +240,10 @@ CREATE TABLE `api_test_record`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '接口测试记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of api_test_record
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for api_usage_record
 -- ----------------------------
 DROP TABLE IF EXISTS `api_usage_record`;
@@ -214,6 +262,10 @@ CREATE TABLE `api_usage_record`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '接口调用记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of api_usage_record
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for developer
 -- ----------------------------
 DROP TABLE IF EXISTS `developer`;
@@ -227,6 +279,10 @@ CREATE TABLE `developer`  (
   `updated_at` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`developer_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '开发者信息' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of developer
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for developer_setting
@@ -245,6 +301,10 @@ CREATE TABLE `developer_setting`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '个人设置' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of developer_setting
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for domain_prefix_mapping
 -- ----------------------------
 DROP TABLE IF EXISTS `domain_prefix_mapping`;
@@ -260,6 +320,10 @@ CREATE TABLE `domain_prefix_mapping`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '域名前缀映射' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of domain_prefix_mapping
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for internal_message
 -- ----------------------------
 DROP TABLE IF EXISTS `internal_message`;
@@ -270,6 +334,10 @@ CREATE TABLE `internal_message`  (
   `created_at` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`message_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '站内信' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of internal_message
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for message_recipient
@@ -288,6 +356,10 @@ CREATE TABLE `message_recipient`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消息接收' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of message_recipient
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for super_admin
 -- ----------------------------
 DROP TABLE IF EXISTS `super_admin`;
@@ -296,6 +368,11 @@ CREATE TABLE `super_admin`  (
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '超级管理员' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '超级管理员' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of super_admin
+-- ----------------------------
+INSERT INTO `super_admin` VALUES (1, 'admin', '1056eee578e1ebd99340d888766428d9');
 
 SET FOREIGN_KEY_CHECKS = 1;
