@@ -18,6 +18,9 @@ func WebRegisterValidator() {
 	key = consts.ValidatorPrefix + "SuperAdminRegister"
 	containers.Set(key, super_admin.SuperAdminRegister{})
 
+	key = consts.ValidatorPrefix + "SuperAdminLogin"
+	containers.Set(key, super_admin.SuperAdminLogin{})
+
 	//// Users 模块表单验证器按照 key => value 形式注册在容器，方便路由模块中调用
 	//key = consts.ValidatorPrefix + "UsersRegister"
 	//containers.Set(key, users.Register{})

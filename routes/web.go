@@ -34,7 +34,7 @@ func InitWebRouter() *gin.Engine {
 
 		noAuthToSuperAdmin := admin.Group("super_admin/")
 		{
-			noAuthToSuperAdmin.GET("login")
+			noAuthToSuperAdmin.GET("login", validatorFactory.Create(consts.ValidatorPrefix+"SuperAdminLogin"))
 
 			// 一般不需要的时候要把超级管理员的注册入口关闭
 			noAuthToSuperAdmin.POST("register", validatorFactory.Create(consts.ValidatorPrefix+"SuperAdminRegister"))

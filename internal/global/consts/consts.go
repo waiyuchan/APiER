@@ -17,9 +17,9 @@ const (
 
 	// token相关
 	JwtTokenOK            int    = 200100                      // token有效
-	JwtTokenInvalid       int    = -400100                     // 无效的token
-	JwtTokenExpired       int    = -400101                     // 过期的token
-	JwtTokenFormatErrCode int    = -400102                     // 提交的 token 格式错误
+	JwtTokenInvalid       int    = 400100                      // 无效的token
+	JwtTokenExpired       int    = 400101                      // 过期的token
+	JwtTokenFormatErrCode int    = 400102                      // 提交的 token 格式错误
 	JwtTokenFormatErrMsg  string = "提交的 token 格式错误"            // 提交的 token 格式错误
 	JwtTokenMustValid     string = "token为必填项，请在请求header部分提交!" // 提交的 token 格式错误
 
@@ -27,22 +27,22 @@ const (
 	RequestStatusOkCode int    = 200
 	RequestStatusOkMsg  string = "Success"
 
-	RequestCreatFailCode int    = -400200
+	RequestCreatFailCode int    = 400200
 	RequestCreatFailMsg  string = "新增失败"
 
-	RequestUpdateFailCode int    = -400201
+	RequestUpdateFailCode int    = 400201
 	RequestUpdateFailMsg  string = "更新失败"
 
-	RequestDeleteFailCode int    = -400202
+	RequestDeleteFailCode int    = 400202
 	RequestDeleteFailMsg  string = "删除失败"
 
-	RequestSelectFailCode int    = -400203
+	RequestSelectFailCode int    = 400203
 	RequestSelectFailMsg  string = "查询无数据"
 
-	RequestRegisterFailCode int    = -400204
+	RequestRegisterFailCode int    = 400204
 	RequestRegisterFailMsg  string = "注册失败"
 
-	RequestLoginFailCode int    = -400205
+	RequestLoginFailCode int    = 400205
 	RequestLoginFailMsg  string = "登录失败"
 
 	RequestRefreshTokenFailCode int    = -400206

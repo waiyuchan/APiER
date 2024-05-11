@@ -26,12 +26,12 @@ func (sam *SuperAdminModel) TableName() string {
 }
 
 // SuperAdminRegister 超级管理员注册
-func (sam *SuperAdminModel) SuperAdminRegister(userName string, encryptedPassword string) bool {
+func (sam *SuperAdminModel) SuperAdminRegister(username string, encryptedPassword string) bool {
 	variable.ZapLog.Info("准备写入数据库...")
 
 	// 检查用户名是否已经存在
 	var existingUser SuperAdminModel
-	if result := sam.DB.Where("username = ?", userName).First(&existingUser); errors.Is(result.Error, gorm.ErrRecordNotFound) {
+	if result := sam.DB.Where("username = ?", username).First(&existingUser); errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		// 如果用户不存在，则继续创建新用户
 	} else if result.Error != nil {
 		// 如果发生了其他错误，记录错误并返回
@@ -45,7 +45,7 @@ func (sam *SuperAdminModel) SuperAdminRegister(userName string, encryptedPasswor
 
 	// 创建新用户
 	newUser := SuperAdminModel{
-		Username: userName,
+		Username: username,
 		Password: encryptedPassword,
 	}
 	if err := sam.DB.Create(&newUser).Error; err != nil {
@@ -58,16 +58,21 @@ func (sam *SuperAdminModel) SuperAdminRegister(userName string, encryptedPasswor
 }
 
 // SuperAdminLogin 超级管理员登录
-func (sam *SuperAdminModel) SuperAdminLogin(userName string, pass string) *SuperAdminModel {
-	sql := "select id, user_name,real_name,pass,phone  from tb_users where  user_name=?  limit 1"
-	result := sam.Raw(sql, userName).First(sam)
-	if result.Error == nil {
-		// 账号密码验证成功
-		if len(sam.Password) > 0 && (sam.Password == encryption.Base64Md5(pass)) {
-			return sam
-		}
-	} else {
-		variable.ZapLog.Error("根据账号查询单条记录出错:", zap.Error(result.Error))
+func (sam *SuperAdminModel) SuperAdminLogin(username string, password string) *SuperAdminModel {
+	// 修改SQL查询，包括密码字段
+	sql := "SELECT id, username, password FROM super_admin WHERE username=? LIMIT 1"
+	result := sam.DB.Raw(sql, username).Scan(sam)
+	if result.Error != nil {
+		variable.ZapLog.Error("根据用户名查询出错:", zap.Error(result.Error))
+		return nil
 	}
+
+	// 账号密码验证成功
+	if sam.Password != "" && encryption.Base64Md5(password) == sam.Password {
+		return sam
+	}
+
+	// 如果密码不匹配，也可以在这里记录日志或返回错误
+	variable.ZapLog.Error("密码验证失败")
 	return nil
 }

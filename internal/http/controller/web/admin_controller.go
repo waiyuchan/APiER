@@ -5,7 +5,7 @@ import (
 	"apier/internal/global/consts"
 	"apier/internal/global/variable"
 	"apier/internal/model"
-	"apier/internal/service/web/super_admin/admin"
+	"apier/internal/service/web/super_admin"
 	"apier/internal/utils/response"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -27,16 +27,14 @@ type CreateAdminInput struct {
 type SuperAdmin struct {
 }
 
+// 超级管理员注册
 func (sa *SuperAdmin) SuperAdminRegister(context *gin.Context) {
 	username := context.GetString(consts.ValidatorPrefix + "username")
 	password := context.GetString(consts.ValidatorPrefix + "password")
 
-	variable.ZapLog.Info("用户账号：" + username)
-	variable.ZapLog.Info("用户密码：" + password)
+	variable.ZapLog.Info("用户注册账号：" + username + "，用户注册密码：" + password)
 
-	admin.CreateSuperAdminFactory().Register(username, password)
-
-	if admin.CreateSuperAdminFactory().Register(username, password) {
+	if super_admin.CreateSuperAdminFactory().Register(username, password) {
 		response.Success(context, consts.RequestStatusOkMsg, "")
 	} else {
 		response.Fail(context, consts.RequestRegisterFailCode, consts.RequestRegisterFailMsg, "")
@@ -44,33 +42,18 @@ func (sa *SuperAdmin) SuperAdminRegister(context *gin.Context) {
 
 }
 
+// 超级管理员登录
 func (sa *SuperAdmin) SuperAdminLogin(context *gin.Context) {
-
-	variable.ZapLog.Info("基本的运行提示类信息")
-
-	userName := context.GetString(consts.ValidatorPrefix + "username")
+	username := context.GetString(consts.ValidatorPrefix + "username")
 	password := context.GetString(consts.ValidatorPrefix + "password")
 
-	superAdminModelFact := model.CreateSuperAdminFactory()
-	superAdminModel := superAdminModelFact.SuperAdminLogin(userName, password)
+	variable.ZapLog.Info("用户登录账号：" + username + "，用户登录密码：" + password)
 
-	fmt.Println(superAdminModel)
-	variable.ZapLog.Info("基本的运行提示类信息")
-
-	var input LoginInput
-	if err := context.ShouldBindJSON(&input); err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"errors": err.Error()})
-		return
+	if super_admin.CreateSuperAdminFactory().Login(username, password) != nil {
+		response.Success(context, "Login successful", "")
+	} else {
+		response.Fail(context, consts.RequestLoginFailCode, "Incorrect username or password", gin.H{"token": ""})
 	}
-	//
-	//// 这里添加登录逻辑，比如检查用户名和密码是否匹配
-	//// 假设超级管理员用户名和密码分别为admin和password（实际开发中需要更安全的验证机制）
-	//
-	//if input.Username == "admin" && input.Password == "password" {
-	//	c.JSON(http.StatusOK, gin.H{"notification": "Login successful"})
-	//} else {
-	//	c.JSON(http.StatusUnauthorized, gin.H{"errors": "Incorrect username or password"})
-	//}
 }
 
 func CreateAdmin(c *gin.Context) {
