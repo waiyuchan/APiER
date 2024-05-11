@@ -1,7 +1,7 @@
 package gorm_v2
 
 import (
-	"apier/internal/global/errors"
+	"apier/internal/global/custom_errors"
 	"apier/internal/global/variable"
 	"fmt"
 	"go.uber.org/zap"
@@ -25,7 +25,7 @@ func GetSqlDriver(sqlType string, readDbIsOpen int, dbConf ...ConfigParams) (*go
 
 	var dbDialector gorm.Dialector
 	if val, err := getDbDialector(sqlType, "Write", dbConf...); err != nil {
-		variable.ZapLog.Error(errors.ErrorsDialectorDbInitFail+sqlType, zap.Error(err))
+		variable.ZapLog.Error(custom_errors.ErrorsDialectorDbInitFail+sqlType, zap.Error(err))
 	} else {
 		dbDialector = val
 	}
@@ -42,7 +42,7 @@ func GetSqlDriver(sqlType string, readDbIsOpen int, dbConf ...ConfigParams) (*go
 	// 读写分离配置，如果开启了读写分离，需要配置读数据库（resource、read、replicas）
 	if readDbIsOpen == 1 {
 		if val, err := getDbDialector(sqlType, "Read", dbConf...); err != nil {
-			variable.ZapLog.Error(errors.ErrorsDialectorDbInitFail+sqlType, zap.Error(err))
+			variable.ZapLog.Error(custom_errors.ErrorsDialectorDbInitFail+sqlType, zap.Error(err))
 		} else {
 			dbDialector = val
 		}
@@ -84,7 +84,7 @@ func getDbDialector(sqlType, readWrite string, dbConf ...ConfigParams) (gorm.Dia
 	//case "postgres", "postgresql", "postgre":
 	//	dbDialector = postgres.Open(dsn)
 	//default:
-	//	return nil, errors.New(errors.ErrorsDbDriverNotExists + sqlType)
+	//	return nil, custom_errors.New(custom_errors.ErrorsDbDriverNotExists + sqlType)
 	//}
 
 	// 由于本系统仅使用MySQL，就不进行兼容处理

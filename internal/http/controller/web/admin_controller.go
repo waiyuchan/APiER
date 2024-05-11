@@ -60,7 +60,7 @@ func CreateAdmin(c *gin.Context) {
 	// 绑定输入数据
 	var input CreateAdminInput
 	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"errors": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"custom_errors": err.Error()})
 		return
 	}
 
@@ -70,7 +70,7 @@ func CreateAdmin(c *gin.Context) {
 	admin := model.Admin{Username: input.Username, Password: input.Password, Email: input.Email, Role: input.Role}
 	result := db.DB.Create(&admin) // `db` 是*gorm.DB类型的全局变量
 	if result.Error != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"errors": result.Error.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"custom_errors": result.Error.Error()})
 		return
 	}
 
@@ -81,7 +81,7 @@ func ListAdmins(c *gin.Context) {
 	var admins []model.Admin
 	result := db.DB.Find(&admins) // `db` 是*gorm.DB类型的全局变量
 	if result.Error != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"errors": result.Error.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"custom_errors": result.Error.Error()})
 		return
 	}
 

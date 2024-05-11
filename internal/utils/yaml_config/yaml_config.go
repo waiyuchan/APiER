@@ -2,7 +2,7 @@ package yaml_config
 
 import (
 	"apier/internal/container"
-	"apier/internal/global/errors"
+	"apier/internal/global/custom_errors"
 	"apier/internal/global/variable"
 	"apier/internal/utils/yaml_config/yaml_config_interface"
 	"github.com/fsnotify/fsnotify"
@@ -42,7 +42,7 @@ func CreateYamlFactory(fileName ...string) yaml_config_interface.YamlConfigInter
 	configInstance.SetConfigType("yml")
 
 	if err := configInstance.ReadInConfig(); err != nil {
-		log.Fatal(errors.ErrorsConfigInitFail + err.Error())
+		log.Fatal(custom_errors.ErrorsConfigInitFail + err.Error())
 	}
 
 	return &yamlConfig{
@@ -109,7 +109,7 @@ func (y *yamlConfig) Clone(fileName string) yaml_config_interface.YamlConfigInte
 
 	(&ymlC).viper.SetConfigName(fileName)
 	if err := (&ymlC).viper.ReadInConfig(); err != nil {
-		variable.ZapLog.Error(errors.ErrorsConfigInitFail, zap.Error(err))
+		variable.ZapLog.Error(custom_errors.ErrorsConfigInitFail, zap.Error(err))
 	}
 	return &ymlC
 }

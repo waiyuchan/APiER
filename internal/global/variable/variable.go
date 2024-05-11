@@ -1,7 +1,7 @@
 package variable
 
 import (
-	"apier/internal/global/errors"
+	"apier/internal/global/custom_errors"
 	"apier/internal/utils/yaml_config/yaml_config_interface"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
@@ -38,7 +38,7 @@ func init() {
 			BasePath = curPath
 		}
 	} else {
-		log.Fatal(errors.ErrorsBasePath)
+		log.Fatal(custom_errors.ErrorsBasePath)
 	}
 
 }

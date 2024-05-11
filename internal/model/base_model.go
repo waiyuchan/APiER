@@ -1,7 +1,7 @@
 package model
 
 import (
-	"apier/internal/global/errors"
+	"apier/internal/global/custom_errors"
 	"apier/internal/global/variable"
 	"fmt"
 	"gorm.io/gorm"
@@ -24,14 +24,14 @@ func UseDbConn(sqlType string) *gorm.DB {
 		sqlType = "mysql"
 	}
 	if variable.GormDbMysql == nil {
-		variable.ZapLog.Fatal(fmt.Sprintf(errors.ErrorsGormNotInitGlobalPointer, sqlType, sqlType))
+		variable.ZapLog.Fatal(fmt.Sprintf(custom_errors.ErrorsGormNotInitGlobalPointer, sqlType, sqlType))
 	}
 	db = variable.GormDbMysql
 
 	//switch strings.ToLower(sqlType) {
 	//case "mysql":
 	//	if variable.GormDbMysql == nil {
-	//		variable.ZapLog.Fatal(fmt.Sprintf(errors.ErrorsGormNotInitGlobalPointer, sqlType, sqlType))
+	//		variable.ZapLog.Fatal(fmt.Sprintf(custom_errors.ErrorsGormNotInitGlobalPointer, sqlType, sqlType))
 	//	}
 	//	db = variable.GormDbMysql
 	//case "sqlserver":
@@ -39,7 +39,7 @@ func UseDbConn(sqlType string) *gorm.DB {
 	//case "postgres", "postgre", "postgresql":
 	//
 	//default:
-	//	variable.ZapLog.Error(errors.ErrorsDbDriverNotExists + sqlType)
+	//	variable.ZapLog.Error(custom_errors.ErrorsDbDriverNotExists + sqlType)
 	//}
 	return db
 }

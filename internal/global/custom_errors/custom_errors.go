@@ -1,4 +1,4 @@
-package errors
+package custom_errors
 
 const (
 	//系统部分

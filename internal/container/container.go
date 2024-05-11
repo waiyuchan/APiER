@@ -1,7 +1,7 @@
 package container
 
 import (
-	"apier/internal/global/errors"
+	"apier/internal/global/custom_errors"
 	"apier/internal/global/variable"
 	"log"
 	"strings"
@@ -28,10 +28,10 @@ func (c *containers) Set(key string, value interface{}) (res bool) {
 	} else {
 		// 程序启动阶段，zaplog 未初始化，使用系统log打印启动时候发生的异常日志
 		if variable.ZapLog == nil {
-			log.Fatal(errors.ErrorsContainerKeyAlreadyExists + "，请解决键名重复问题，相关键：" + key)
+			log.Fatal(custom_errors.ErrorsContainerKeyAlreadyExists + "，请解决键名重复问题，相关键：" + key)
 		} else {
 			// 程序启动初始化完成
-			variable.ZapLog.Warn(errors.ErrorsContainerKeyAlreadyExists + "，相关键：" + key)
+			variable.ZapLog.Warn(custom_errors.ErrorsContainerKeyAlreadyExists + "，相关键：" + key)
 		}
 	}
 	return

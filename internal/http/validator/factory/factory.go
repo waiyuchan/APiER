@@ -2,7 +2,7 @@ package factory
 
 import (
 	"apier/internal/container"
-	"apier/internal/global/errors"
+	"apier/internal/global/custom_errors"
 	"apier/internal/global/variable"
 	"apier/internal/http/validator/validator_interface"
 	"github.com/gin-gonic/gin"
@@ -16,6 +16,6 @@ func Create(key string) func(context *gin.Context) {
 			return val.CheckParams
 		}
 	}
-	variable.ZapLog.Error(errors.ErrorsValidatorNotExists + ", 验证器模块：" + key)
+	variable.ZapLog.Error(custom_errors.ErrorsValidatorNotExists + ", 验证器模块：" + key)
 	return nil
 }

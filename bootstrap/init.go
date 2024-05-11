@@ -1,7 +1,7 @@
 package bootstrap
 
 import (
-	"apier/internal/global/errors"
+	"apier/internal/global/custom_errors"
 	"apier/internal/global/variable"
 	"apier/internal/http/validator/common/register_validator"
 	"apier/internal/utils/gorm_v2"
@@ -59,7 +59,7 @@ func init() {
 	// 6.根据配置初始化 gorm mysql 全局 *gorm.Db
 	if variable.ConfigGormYaml.GetInt("Gorm.Mysql.IsInitGlobalGormMysql") == 1 {
 		if dbMysql, err := gorm_v2.GetMysqlClient(); err != nil {
-			log.Fatal(errors.ErrorsGormInitFail + err.Error())
+			log.Fatal(custom_errors.ErrorsGormInitFail + err.Error())
 		} else {
 			variable.GormDbMysql = dbMysql
 		}

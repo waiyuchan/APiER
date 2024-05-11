@@ -2,7 +2,7 @@ package response
 
 import (
 	"apier/internal/global/consts"
-	"apier/internal/global/errors"
+	"apier/internal/global/custom_errors"
 	validator_translation "apier/internal/utils/validator_transiation"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
@@ -42,7 +42,7 @@ func Fail(c *gin.Context, dataCode int, msg string, data interface{}) {
 // ErrorTokenBaseInfo token 基本的格式错误
 
 func ErrorTokenBaseInfo(c *gin.Context) {
-	ReturnJson(c, http.StatusBadRequest, http.StatusBadRequest, errors.ErrorsTokenBaseInfo, "")
+	ReturnJson(c, http.StatusBadRequest, http.StatusBadRequest, custom_errors.ErrorsTokenBaseInfo, "")
 	//终止可能已经被加载的其他回调函数的执行
 	c.Abort()
 }
@@ -50,7 +50,7 @@ func ErrorTokenBaseInfo(c *gin.Context) {
 // ErrorTokenAuthFail token 权限校验失败
 
 func ErrorTokenAuthFail(c *gin.Context) {
-	ReturnJson(c, http.StatusUnauthorized, http.StatusUnauthorized, errors.ErrorsNoAuthorization, "")
+	ReturnJson(c, http.StatusUnauthorized, http.StatusUnauthorized, custom_errors.ErrorsNoAuthorization, "")
 	//终止可能已经被加载的其他回调函数的执行
 	c.Abort()
 }
@@ -58,7 +58,7 @@ func ErrorTokenAuthFail(c *gin.Context) {
 // ErrorTokenRefreshFail token不符合刷新条件
 
 func ErrorTokenRefreshFail(c *gin.Context) {
-	ReturnJson(c, http.StatusUnauthorized, http.StatusUnauthorized, errors.ErrorsRefreshTokenFail, "")
+	ReturnJson(c, http.StatusUnauthorized, http.StatusUnauthorized, custom_errors.ErrorsRefreshTokenFail, "")
 	//终止可能已经被加载的其他回调函数的执行
 	c.Abort()
 }
@@ -73,7 +73,7 @@ func TokenErrorParam(c *gin.Context, wrongParam interface{}) {
 // ErrorCasbinAuthFail 鉴权失败，返回 405 方法不允许访问
 
 func ErrorCasbinAuthFail(c *gin.Context, msg interface{}) {
-	ReturnJson(c, http.StatusMethodNotAllowed, http.StatusMethodNotAllowed, errors.ErrorsCasbinNoAuthorization, msg)
+	ReturnJson(c, http.StatusMethodNotAllowed, http.StatusMethodNotAllowed, custom_errors.ErrorsCasbinNoAuthorization, msg)
 	c.Abort()
 }
 
@@ -99,7 +99,7 @@ func ValidatorError(c *gin.Context, err error) {
 		errStr := err.Error()
 		// multipart:nextpart:eof 错误表示验证器需要一些参数，但是调用者没有提交任何参数
 		if strings.ReplaceAll(strings.ToLower(errStr), " ", "") == "multipart:nextpart:eof" {
-			ReturnJson(c, http.StatusBadRequest, consts.ValidatorParamsCheckFailCode, consts.ValidatorParamsCheckFailMsg, gin.H{"tips": errors.ErrorNotAllParamsIsBlank})
+			ReturnJson(c, http.StatusBadRequest, consts.ValidatorParamsCheckFailCode, consts.ValidatorParamsCheckFailMsg, gin.H{"tips": custom_errors.ErrorNotAllParamsIsBlank})
 		} else {
 			ReturnJson(c, http.StatusBadRequest, consts.ValidatorParamsCheckFailCode, consts.ValidatorParamsCheckFailMsg, gin.H{"tips": errStr})
 		}
